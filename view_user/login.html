@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <title>SuperBingo - Login</title>
+
+  <!-- CSS Style -->
+  <link rel="stylesheet" href="css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/mdb.min.css">  
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+</head>
+
+<body id="login">
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper">
+      <div class="row">
+        <div class="content-wrapper full-page-wrapper d-flex align-items-center auth-pages">
+          <div class="card col-lg-4 mx-auto">
+            <div class="card-body px-5 py-5">
+              <div class="text-center">
+                <img src="images/login/title.png" class="logo" alt="Logo">
+              </div>
+              <form ng-app="MyApp" ng-controller="Login" name="login">
+                <div class="md-form">
+                  <input ng-model="email" type="text" id="email" class="form-control" />
+                  <label for="email">👨‍💻 Email *</label>
+                </div>
+                <div class="md-form">
+                  <input ng-model="password" type="password" id="password" class="form-control">
+                  <label for="password">🔑 Contraseña *</label>
+
+                </div>
+
+                <div class="text-center">
+                  <button ng-click="ButtonClick()" type="button" class="btn gradient-OrangeViolet btn-block enter-btn">INGRESAR</button>
+                  <button ng-click="ButtonRedirect()" type="button" class="btn gradient-BlueGreen btn-block enter-btn">REGISTRAR</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Utils & Data -->
+  <script src="../build/js/utilJS.js"></script>
+  <script src="../build/js/servicesJS.js"></script>
+
+
+  <!-- Plugin JS -->
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../build/js/mdb.min.js"></script>
+  <script src="../build/js/jquery.cookie.js"></script>
+  <script src="../vendors/angularJS/angular.min.js"></script>  
+  <script src="../vendors/toastr/toastr.min.js"></script>  
+  <script src="../controllers/loginController.js"></script>
+
+</body>
+
+</html>

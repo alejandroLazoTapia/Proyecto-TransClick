@@ -1,0 +1,61 @@
+body {
+	background: #4B8EDD;
+}
+
+.gradient-BlueGreen {
+	background: #66CCFF;
+	background: -moz-linear-gradient(left, #66CCFF 0%, #660099 100%);
+	background: -webkit-linear-gradient(left, #66CCFF 0%,#660099 100%);
+	background: linear-gradient(to right, #66CCFF 0%,#660099 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#66CCFF', endColorstr='#660099',GradientType=1 );
+	color: #fff;
+}
+
+.gradient-GreenViolet {
+	background: rgb(70, 252, 80);
+	background: -moz-linear-gradient(left, rgb(70, 252, 80) 0%, #660099 100%);
+	background: -webkit-linear-gradient(left, rgb(70, 252, 80) 0%,#660099 100%);
+	background: linear-gradient(to right, rgb(70, 252, 80) 0%,#660099 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(70, 252, 80)', endColorstr='#660099',GradientType=1 );
+	color: #fff;
+}
+
+.gradient-OrangeViolet {
+	background: rgb(235, 114, 44);
+	background: -moz-linear-gradient(left, rgb(235, 114, 44) 0%, #660099 100%);
+	background: -webkit-linear-gradient(left, rgb(235, 114, 44) 0%,#660099 100%);
+	background: linear-gradient(to right, rgb(235, 114, 44) 0%,#660099 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='rgb(235, 114, 44)', endColorstr='#660099',GradientType=1 );
+	color: #fff;
+}
+
+/* FORM */
+
+.md-form label {
+	top: 1.2rem;
+	font-size: .9rem;
+}
+
+/* NAVBAR */
+
+.navbar .navbar-brand-wrapper .navbar-brand img {
+	width: 170px;
+	height: 41px;
+}
+.navbar .navbar-brand-wrapper .brand-logo-mini img {
+	width: 48px;
+	height: 48px;
+}
+
+/* LOGIN */
+
+#login .form-check-input {
+	margin-left: 0;
+}
+#login .card .card-body {
+    padding: 1.88rem 1.2rem!important;
+}
+#login .logo {
+	margin: 0 auto 1.7rem;
+	width: 80%;
+}
