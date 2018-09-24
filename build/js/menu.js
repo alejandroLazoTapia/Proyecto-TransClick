@@ -1,26 +1,58 @@
-    var app = angular.module('MyApp', []);
-    
-app.controller('Profile', function ($scope, $http, $window) {
-    
-        // Generar request al servicio
-    var datos = { "id": 1};
-    var request = $.get(menu_service , datos);
-    var htmlStrTxt = "";
+var xhReq = new XMLHttpRequest();
+    xhReq.open("GET", menu_service + "1", false);
+    xhReq.send(null);
+    var data = JSON.parse(xhReq.responseText);
+    console.log(data);
 
-        // Si el request esta OK
-        request.done(function (jqXHR, textStatus, errorThrown) {             
-            //Verifico respuesta del servicio
-            console.log(jqXHR);
-            htmlStrTxt = jqXHR.code_html;
+//carga los menus
+var builddata = function () {
+    var source = [];
+    var items = [];
+    // build hierarchical source.
+    
+    for (i = 0; i < data.length; i++) {
+        var item = data[i];
+        var nombre = item["nombre"];
+        var padreId = item["padreId"];
+        var id = item["id"];
+        var url = item["url"];
+        var span= item["span"];
+        var icon= item["icon"];
 
-              if (textStatus == "success") {
-                  console.log(htmlStrTxt);
-                  $("#menuDesplegable").replaceWith(htmlStrTxt);                  
-                    return htmlStrTxt;
-              } else {
-                  // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.
-                toastr.error("Error:" + errorThrown);
-                $.cookie("session", false);
+        if (items[padreId]) {
+            var item = { padreId: padreId, nombre: nombre, item: item, url: url, span: span, icon: icon };
+            if (!items[padreId].items) {
+                items[padreId].items = [];
             }
-          });
+            items[padreId].items[items[padreId].items.length] = item;
+            items[id] = item;
+        }
+        else {
+            items[id] = { padreId: padreId, nombre: nombre, item: item, url: url, span: span, icon: icon  };
+            source[id] = items[id];
+        }
+    }
+    return source;
+}
+
+var source = builddata();
+//agrega recursivamente los menus
+var buildUL = function (parent, items) {
+    $.each(items, function () {
+        if (this.nombre) {
+            // create elemtos li y agrega los parientes en caso de haber hijos
+            var li = $("<li><a href='"+this.url+"'><i class='"+this.icon+"'></i>" + this.nombre + "<span class='"+this.span+"'></span></a></li>");
+            li.appendTo(parent);
+            // if there are sub items, call the buildUL function.
+            if (this.items && this.items.length > 0) {
+                var ul = $('<ul class="nav child_menu"></ul>');
+                ul.appendTo(li);
+                buildUL(ul, this.items);
+            }
+        }
     });
+}
+var ul = $('<ul class="nav side-menu"></ul>');
+ul.appendTo("#jqxMenu");
+buildUL(ul, source);
+
