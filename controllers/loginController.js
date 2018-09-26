@@ -1,80 +1,80 @@
    //Crea un cookie con info del usuario
    $(document).ready(function () {
-          $.cookie("session", false);
-          $.removeCookie("usuario");
+    $.cookie("session", false);
+    $.removeCookie("usuario");
 
-      });
+});
 
-    //Valida los campos ingresados en el formulario  
-    function validateInput(){
-      var obj =[];
-      obj.status = true;
-      obj.message = "";
+//Valida los campos ingresados en el formulario  
+function validateInput(){
+var obj =[];
+obj.status = true;
+obj.message = "";
 
-      if ($('#email').val() == ''){
-        obj.status = false;
-        obj.message = "Debe ingresar email.";
-      }else if($('#password').val()  == ''){
-        obj.status = false;
-        obj.message = "Debe ingresar password.";
-      }
-      return obj;
-    } 
-      
-    var app = angular.module('MyApp', []);
-    app.controller('Login', function ($scope, $http, $window) {
+if ($('#email').val() == ''){
+  obj.status = false;
+  obj.message = "Debe ingresar email.";
+}else if($('#password').val()  == ''){
+  obj.status = false;
+  obj.message = "Debe ingresar password.";
+}
+return obj;
+} 
 
-      // Al ejecutar el evento click en login
-      $scope.ButtonClick = function () {
-        var validate = validateInput();
+var app = angular.module('MyApp', []);
+app.controller('Login', function ($scope, $http, $window) {
 
-        // Validar campos solicitados
-        if (validate.status == true){
-        
-        // Generar request al servicio
-        var datos = { "email": $scope.email, "pass": $scope.password };
-        var request = $.get(service_login , datos);
+// Al ejecutar el evento click en login
+$scope.ButtonClick = function () {
+  var validate = validateInput();
 
-	      console.log(service_login);
-        console.log(datos);
-        console.log(request);
-        
-        // Si el request est� OK
-        request.done(function (jqXHR, textStatus, errorThrown) {             
-          console.log(jqXHR);
+  // Validar campos solicitados
+  if (validate.status == true){
+  
+  // Generar request al servicio
+  var datos = { "email": $scope.email, "pass": $scope.password };
+  var request = $.get(service_login , datos);
 
-            if (textStatus == "success") {
-               // si el login es correcto creo la sesion en verdadero
-                $.cookie("session", true);
-                $.cookie("usuario", $scope.email); 
-                //toastr.success('Success messages');               
-                $window.location.href = getAbsolutePath() + "/profile.html";
-            } else {
-                // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.
-              toastr.error("Error:" + errorThrown);
-              $.cookie("session", false);
-          }
-        });
+  console.log(service_login);
+  console.log(datos);
+  console.log(request);
+  
+  // Si el request est� OK
+  request.done(function (jqXHR, textStatus, errorThrown) {             
+    console.log(jqXHR);
 
-        // Si falla el Request
-        request.fail(function (jqXHR, textStatus, errorThrown) {  
-          console.log(textStatus + ": " + errorThrown);          
-          if(jqXHR.status == 404){
-            toastr.error("Credenciales inválidas.");
-          }else if (jqXHR.status == 500) {
-            toastr.warning("Error interno del servidor [500].");                    
-          }else if (jqXHR.status == 0) {
-            toastr.info("Verifique su conexión [0].");                    
-          }          
-        });
+      if (textStatus == "success") {
+         // si el login es correcto creo la sesion en verdadero
+          $.cookie("session", true);
+          $.cookie("usuario", $scope.email); 
+          //toastr.success('Success messages');               
+          $window.location.href = getAbsolutePath() + "/profile.html";
+      } else {
+          // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.
+        toastr.error("Error:" + errorThrown);
+        $.cookie("session", false);
+    }
+  });
 
-      }else{
-        toastr.info(validate.message);                    
-      } 
-      }
+  // Si falla el Request
+  request.fail(function (jqXHR, textStatus, errorThrown) {  
+    console.log(textStatus + ": " + errorThrown);          
+    if(jqXHR.status == 404){
+      toastr.error("Credenciales inválidas.");
+    }else if (jqXHR.status == 500) {
+      toastr.warning("Error interno del servidor [500].");                    
+    }else if (jqXHR.status == 0) {
+      toastr.info("Verifique su conexión [0].");                    
+    }          
+  });
 
-      // Redireccionar al formulario de registro
-      $scope.ButtonRedirect = function () {
-        $window.location.href = getAbsolutePath() + "/register.html";
-      }
-    });
+}else{
+  toastr.info(validate.message);                    
+} 
+}
+
+// Redireccionar al formulario de registro
+$scope.ButtonRedirect = function () {
+  $window.location.href = getAbsolutePath() + "/register.html";
+}
+});

@@ -24,6 +24,10 @@ function getMaxOfJson(jsonalreadyparsed, property) {
     return max;
 };
 
+function mayusc(e) {
+    e.value = e.value.toUpperCase();
+}
+
 var config = 
 {
     async: true,
