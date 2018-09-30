@@ -1,29 +1,33 @@
 angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window) {
     
+    $scope.entity = {}
+
     // Obtener perfiles mediante método GET
-    $scope.loading = false;
     $scope.getData = function() 
     {
-        $scope.loading = true;
         $http.get(service_profiles)
         .then(function(response){
             $scope.JsonData = response.data;
-            $scope.loading = false;
         }, function (error) {
             toastr.error("Ocurrió un error al intentar leer el registro");
             console.log(error);
         });
     }
     
-    $scope.getData();	 
-	$scope.entity = {}
-            
+    $scope.getData();
+    $scope.entity.disabled == true;
+
     //Función para editar registros
-	 $scope.edit = function(index){
-     $scope.entity = $scope.JsonData[index];
-	   $scope.entity.index = index;
-     $scope.entity.editable = true;
-     console.log($scope.entity);
+     $scope.edit = function(index)
+     {
+        var fila = index + 1;
+        $("table tr:eq("+fila+") #optStatus").removeAttr("disabled");
+
+        $scope.entity = $scope.JsonData[index];
+        $scope.entity.index = index;
+        $scope.entity.editable = true;     
+        $scope.entity.disabled = false; 
+        console.log($scope.entity);
 	 }
    
     
@@ -38,7 +42,8 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
             $http.delete(url, config)      
             .then(function (response) {
                 $scope.JsonData.splice(index,1);
-                toastr.success('Success messages');
+                toastr.success('Registro eliminado exitosamente');
+                $scope.getData();
                 console.log(response);
             }, function (error) {
                 toastr.error("Ocurrió un error al intentar eliminar el registro");
@@ -50,7 +55,11 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
     //Función para insertar o modificar registros
      $scope.save = function(index)
         {
-            $scope.JsonData[index].editable = false;
+            var fila = index + 1;
+            $("table tr:eq("+fila+") #optStatus").attr("disabled", true);
+
+            $scope.JsonData[index].editable = false; 
+            $scope.JsonData[index].disabled = true;                                   
             $scope.entity = $scope.JsonData[index];
             $scope.entity.index = index;
                 
@@ -59,26 +68,38 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
             var url = service_profiles  + '/' + $scope.entity; 
 
             console.log(datos);
-            console.log(url);
-                    
-                $http.post(url,datos,config)      
-                .then(function (response) {
-                    console.log(response);
 
-                }, function (error) {
-                    console.log(error);
-                });	   
-        }     
+            if($scope.entity.nombre != ''){
+                if($scope.entity.id_status != undefined){
+                    $http.post(url,datos,config)      
+                    .then(function (response) {
+                        $scope.getData();
+                        toastr.success('Registro guardado exitosamente');
+                        console.log(response);
+    
+                    }, function (error) {
+                        toastr.error("Ocurrió un error al intentar insertar el registro");
+                        console.log(error);
+                    }); 
+                }else{
+                    toastr.warning("Debe seleccionar estado");    	
+                }               
+            }else{
+                toastr.warning("Debe ingresar nombre del perfil");    	
+            }
+   
+        };     
        
     //Función para agregar filas a la tabla    
      $scope.add = function()
         {        
             $scope.JsonData.push({
-            id : getMaxOfJson($scope.JsonData,'id') + 1,
+            id : 0,
             nombre : "",
-            editable:true
-            })
-        }
+            editable:true,
+            disabled: false           
+        })
+        };
 
         $scope.removeSelect = function(){           
             var newDataList=[];
@@ -93,7 +114,8 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
      
                 $http.delete(url, config)      
                 .then(function (response) {
-                    toastr.success('Success messages');
+                    $scope.getData();
+                    toastr.success('Registro eliminado exitosamente');
                     console.log(response);
                     console.log("Delete profile: "+ entity.id)
                 }, function (error) {
@@ -101,10 +123,22 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
                     console.log(error);
                 });
             }
-        });    $scope.JsonData=newDataList;
-        
-        };
+        });    $scope.JsonData=newDataList;        
+        };      
 
+     
+    //Función para insertar o modificar registros
+    $scope.cancel = function(index)
+    {
+        var fila = index + 1;
+        $("table tr:eq("+ fila +") #optStatus").attr("disabled", true);
+
+        $scope.JsonData[index].editable = false; 
+        $scope.JsonData[index].disabled = true;                                   
+        $scope.entity = $scope.JsonData[index];
+        $scope.entity.index = index;
+    };     
+   
 
      $scope.submit = function(data) {
         console.log(data);

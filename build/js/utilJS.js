@@ -63,3 +63,12 @@ function createCORSRequest(method, url) {
     }
     return xhr;
   };
+
+  function enabledBtnDelete(obj)
+    {
+        if(obj.checked==true){            
+            $("#removeBtn").attr("style", "visibility: visible");
+        }else{
+            $("#removeBtn").attr("style", "visibility: hidden");
+        }
+    };
