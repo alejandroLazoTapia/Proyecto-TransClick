@@ -72,9 +72,9 @@ $scope.ButtonClick = function () {
 
   // Generar request al servicio
   var datos = { "id_perfil": 1, "id_doc_type": $scope.typeDocument,  "num_document": $scope.numberDocument, "name": $scope.name, "last_name": $scope.name, "email": $scope.email, "sex": $scope.sex, "birth_date": fechaformat, "password": passencrip };
-  var request = $.post(service_register , datos);
+  var request = $.post(service_user , datos);
 
-  console.log(service_register);
+  console.log(service_user);
   console.log(datos);
   console.log(request);
   
