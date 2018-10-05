@@ -41,6 +41,7 @@ var builddata = function () {
 var arrayUrl = getUrlVars();
 var queryString = "ID=" + arrayUrl.id +"&"+ "PROFILE=" +arrayUrl.id_perfil;
 var queryStringEncrypt = window.btoa(queryString);
+console.log(queryStringEncrypt);
 
 var source = builddata();
 //agrega recursivamente los menus
