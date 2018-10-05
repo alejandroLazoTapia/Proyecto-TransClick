@@ -33,7 +33,7 @@ $scope.ButtonClick = function () {
          var queryStringEncrypt = window.btoa(queryString);
          //console.log(queryString);
          //console.log(queryStringEncrypt);                
-          $window.location.href = getAbsolutePath() + "/profile.html?" + queryStringEncrypt;
+          $window.location.href = getAbsolutePath() + "/view_user/profile.html?" + queryStringEncrypt;
       } else {
           // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.
         toastr.error("Error:" + errorThrown);
