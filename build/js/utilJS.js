@@ -17,21 +17,37 @@ function validateInput(){
 function getUrlVars()
     {
         var vars = [], hash;
+        var url = window.location.href.slice(window.location.href.indexOf('') + 1).split('&');
         var urlEncrypt = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        //console.log("----------------------");        
-        //console.log(urlEncrypt);
-        var dec = window.atob(urlEncrypt);
-        //console.log(dec);
-        //console.log("----------------------");
-        var hashes = dec.split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
-            hash = hashes[i].split('=');
-            //vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
+
+        if (urlEncrypt == undefined || urlEncrypt == '' || url == undefined || url == '') {
+            window.location.href = getAbsolutePath() + "page_404.html";
+            return;
+        }else
+        {                    
+            console.log("----------------------");        
+            console.log("QueryString: " + urlEncrypt);
+            var dec = window.atob(urlEncrypt);
+            //console.log(dec);
+            //console.log("----------------------");
+            var hashes = dec.split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                //vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
         }
         return vars;        
     }
+
+
+    function getUrlEncrypt()
+    {
+        var urlEncrypt = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+
+        return urlEncrypt;        
+    }    
 // Get Path ../
 function getAbsolutePath() {
     var loc = window.location;
@@ -81,4 +97,19 @@ function enabledBtnDelete(obj)
     }else{
         $("#removeBtn").attr("style", "visibility: hidden");
     }
+};
+
+function encrypt(string)
+{
+    var enc = window.btoa(string);
+
+    return enc;
+};
+
+
+function decrypt(string)
+{
+    var dec = window.atob(string);
+
+    return dec;
 };

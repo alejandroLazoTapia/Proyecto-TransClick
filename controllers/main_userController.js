@@ -11,8 +11,7 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
                 $scope.JsonProfile =  response.data;
                 //console.log("------------tipo documento-------------");
                 //console.log($scope.JsonDocType);
-                //console.log(response.data);
-                
+                //console.log(response.data);                
             }, function (error) {
                 toastr.error("Ocurrió un error al intentar leer el registro");
                 console.log(error);
@@ -36,7 +35,7 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
         });        
     }
 
-    // Obtener usuarios mediante método GET
+    // Obtener todos los usuarios mediante método GET
     $scope.getData = function() 
     {
         $http.get(service_user)
@@ -46,7 +45,7 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
             $scope.JsonData = response.data;
             //$scope.JsonData.password = $window.atob(response.data.password.toString());
             getPagination('#datatable-responsive');
-            console.log(response.data);
+            //console.log(response.data);
         }, function (error) {
             toastr.error("Ocurrió un error al intentar leer el registro");
             console.log(error);
@@ -55,6 +54,31 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
     
     $scope.getData();
     $scope.entity.disabled == true;
+
+    //Función para cargar datos por id usuario
+    $scope.getDataByUser = function(index) 
+    {
+        $scope.entity = $scope.JsonData[index];
+        $scope.entity.index = index;            
+        var url = service_user + '/' + $scope.entity.id; 
+
+        $http.get(url)
+        .then(function(response){
+            $scope.getProfile();
+            $scope.getDocumentType();                       
+            $scope.JsonDataUser = response.data;
+            var passEnc = $scope.JsonDataUser.password;
+            $scope.JsonDataUser.password = decrypt(passEnc); 
+            var birth_date = new Date($scope.JsonDataUser.birth_date);
+            $scope.JsonDataUser.birth_date = birth_date.getMonth() + "/" + birth_date.getDate() + "/" + birth_date.getFullYear();   // Returns '02-8-16'                                      
+
+            //console.log(response.data);
+        }, function (error) {
+            toastr.error("Ocurrió un error al intentar leer el registro");
+            console.log(error);
+        });        
+    }
+    
 
     //Función para editar registros
      $scope.edit = function(index)
@@ -95,20 +119,16 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
      
      
     //Función para insertar o modificar registros
-     $scope.save = function(index)
+     $scope.save = function(JsonDataUser)
         {
-            var fila = index + 1;
-            $("table tr:eq("+fila+") #optPerfil").attr("disabled", true);
-            $("table tr:eq("+fila+") #optTypeDoc").attr("disabled", true);
+            var index = JsonDataUser;
+            console.log(index);
 
-            $scope.JsonData[index].editable = false; 
-            $scope.JsonData[index].disabled = true;                                   
-            $scope.entity = $scope.JsonData[index];            
-            $scope.entity.index = index;
-            $scope.entity.password =  $window.btoa($scope.JsonData[index].password)
-            console.log($scope.entity.passwordDecrypt);
-            console.log($scope.entity.password);
-                
+            $scope.entity = $scope.JsonDataUser;            
+            $scope.entity.index = JsonDataUser;
+            var password = $scope.JsonDataUser.password;
+            $scope.entity.password =  encrypt(password);
+                            
             // Generar request al servicio
             var datos = $scope.entity;
            
@@ -199,8 +219,8 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
         $scope.entity.index = index;
     };     
    
-     $scope.submit = function(data) {
-        console.log(data);
+     $scope.clear = function(data) {
+        $scope.JsonDataUser = {};
         // Filter through the selected items if needed
      }; 
 

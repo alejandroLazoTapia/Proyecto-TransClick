@@ -32,8 +32,13 @@ $scope.ButtonClick = function () {
          var queryString = "ID=" + entity[0].id +"&"+ "PROFILE=" +entity[0].id_perfil;         
          var queryStringEncrypt = window.btoa(queryString);
          //console.log(queryString);
-         //console.log(queryStringEncrypt);                
-          $window.location.href = "/view_user/profile.html?" + queryStringEncrypt;
+         //console.log(queryStringEncrypt); 
+         if(entity[0].id_perfil == 2) {
+          $window.location.href = getAbsolutePath() + "/view_admin/main_profile.html?" + queryStringEncrypt;
+         }else{
+          $window.location.href = getAbsolutePath() + "/view_user/profile.html?" + queryStringEncrypt;
+         }              
+          
       } else {
           // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.
         toastr.error("Error:" + errorThrown);
@@ -59,6 +64,6 @@ $scope.ButtonClick = function () {
 
 // Redireccionar al formulario de registro
 $scope.ButtonRedirect = function () {
-  $window.location.href = "/view_user/register.html";
+  $window.location.href = getAbsolutePath() + "/register.html";
 }
 });
