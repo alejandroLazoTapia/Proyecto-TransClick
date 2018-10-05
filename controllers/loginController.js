@@ -59,6 +59,6 @@ $scope.ButtonClick = function () {
 
 // Redireccionar al formulario de registro
 $scope.ButtonRedirect = function () {
-  $window.location.href = getAbsolutePath() + "/register.html";
+  $window.location.href = getAbsolutePath() + "/view_user/register.html";
 }
 });
