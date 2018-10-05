@@ -38,13 +38,17 @@ var builddata = function () {
     return source;
 }
 
+var arrayUrl = getUrlVars();
+var queryString = "ID=" + arrayUrl[0].id +"&"+ "PROFILE=" +arrayUrl[0].id_perfil;
+var queryStringEncrypt = window.btoa(queryString);
+
 var source = builddata();
 //agrega recursivamente los menus
 var buildUL = function (parent, items) {
     $.each(items, function () {
         if (this.nombre) {
             // create elemtos li y agrega los parientes en caso de haber hijos
-            var li = $("<li><a href='" + this.url + queryStringEncrypt +"'><i class='"+this.icon+"'></i>" + this.nombre + "<span class='"+this.span+"'></span></a></li>");
+            var li = $("<li><a href='" + this.url +"?"+ queryStringEncrypt +"'><i class='"+this.icon+"'></i>" + this.nombre + "<span class='"+this.span+"'></span></a></li>");
             li.appendTo(parent);
             // if there are sub items, call the buildUL function.
             if (this.items && this.items.length > 0) {
