@@ -39,7 +39,7 @@ var builddata = function () {
 }
 
 var arrayUrl = getUrlVars();
-var queryString = "ID=" + arrayUrl[0].id +"&"+ "PROFILE=" +arrayUrl[0].id_perfil;
+var queryString = "ID=" + arrayUrl.id +"&"+ "PROFILE=" +arrayUrl.id_perfil;
 var queryStringEncrypt = window.btoa(queryString);
 
 var source = builddata();
