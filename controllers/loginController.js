@@ -33,7 +33,7 @@ $scope.ButtonClick = function () {
          var queryStringEncrypt = window.btoa(queryString);
          //console.log(queryString);
          //console.log(queryStringEncrypt);                
-          $window.location.href = "profile.html?" + queryStringEncrypt;
+          $window.location.href = "/view_user/profile.html?" + queryStringEncrypt;
       } else {
           // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.
         toastr.error("Error:" + errorThrown);
@@ -59,6 +59,6 @@ $scope.ButtonClick = function () {
 
 // Redireccionar al formulario de registro
 $scope.ButtonRedirect = function () {
-  $window.location.href = "register.html";
+  $window.location.href = "/view_user/register.html";
 }
 });
