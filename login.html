@@ -15,7 +15,7 @@
 
   <!-- Plugin CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
+  <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
 </head>
 
 <body id="login">
@@ -36,11 +36,15 @@
                 <div class="md-form">
                   <input ng-model="password" type="password" id="password" class="form-control">
                   <label for="password">🔑 Contraseña *</label>
-
                 </div>
-
+                <div class="md-form">
+                  <div 
+                      class="g-recaptcha" data-sitekey="6LcKu3MUAAAAAL9yDyzrjhcdNQSDydQDl9U_gbB3"
+                      data-callback="recaptcha_callback"
+                      ></div>
+                </div>  
                 <div class="text-center">
-                  <button ng-click="ButtonClick()" type="button" class="btn gradient-OrangeViolet btn-block enter-btn">INGRESAR</button>
+                  <button id="ingreso-btn" ng-click="ButtonClick()" type="button" class="btn gradient-OrangeViolet btn-block enter-btn" disabled>INGRESAR </button>
                   <button ng-click="ButtonRedirect()" type="button" class="btn gradient-BlueGreen btn-block enter-btn">REGISTRAR</button>
                 </div>
               </form>
@@ -65,6 +69,16 @@
   <script src="vendors/angularJS/angular.min.js"></script>  
   <script src="vendors/toastr/toastr.min.js"></script>  
   <script src="controllers/loginController.js"></script>
+
+  <script>
+
+    function recaptcha_callback(){ 
+          
+      var IngresoBtn = document.querySelector("#ingreso-btn");
+        IngresoBtn.removeAttribute('disabled');
+      
+    }
+  </script>
 
 </body>
 
