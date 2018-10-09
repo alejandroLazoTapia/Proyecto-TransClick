@@ -69,7 +69,7 @@ $scope.ButtonClick = function () {
   var fechaformat = fecha.format("yyyy-mm-dd'T'HH:MM:ss");
   // Encriptar contraseña antes de almacenarla
   var passencrip = window.btoa($scope.password);
-
+  
   // Generar request al servicio
   var datos = { "id_perfil": 1, "id_doc_type": $scope.typeDocument,  "num_document": $scope.numberDocument, "name": $scope.name, "last_name": $scope.name, "email": $scope.email, "sex": $scope.sex, "birth_date": fechaformat, "password": passencrip };
   var request = $.post(service_user , datos);
@@ -83,7 +83,8 @@ $scope.ButtonClick = function () {
     console.log(jqXHR);
 
       if (textStatus == "success") {
-          toastr.success('Usuario registrado exitosamente.');               
+          toastr.success('Usuario registrado exitosamente.');    
+                     
           //$window.location.href = getAbsolutePath() + "/login.html";
       } else {
           // si el login es incorrecto creo la sesion en falso y doy anuncio de credenciales invalidad.

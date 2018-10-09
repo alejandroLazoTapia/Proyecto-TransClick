@@ -134,22 +134,22 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
         };      
 
      
-    //Función para insertar o modificar registros
-    $scope.cancel = function(index)
-    {
-        var fila = index + 1;
-        $("table tr:eq("+ fila +") #optStatus").attr("disabled", true);
+        //Función para insertar o modificar registros
+        $scope.cancel = function(index)
+        {
+            var fila = index + 1;
+            $("table tr:eq("+ fila +") #optStatus").attr("disabled", true);
 
-        $scope.JsonData[index].editable = false; 
-        $scope.JsonData[index].disabled = true;                                   
-        $scope.entity = $scope.JsonData[index];
-        $scope.entity.index = index;
-    };     
-   
-     $scope.submit = function(data) {
-        console.log(data);
-        // Filter through the selected items if needed
-     }; 
+            $scope.JsonData[index].editable = false; 
+            $scope.JsonData[index].disabled = true;                                   
+            $scope.entity = $scope.JsonData[index];
+            $scope.entity.index = index;
+        };     
+    
+            $scope.submit = function(data) {
+                console.log(data);
+                // Filter through the selected items if needed
+            }; 
 
 
 	}

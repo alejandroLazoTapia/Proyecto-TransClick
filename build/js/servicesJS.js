@@ -12,3 +12,5 @@ var service_profiles =  "https://webapitransclick.azurewebsites.net/api/Profiles
 var service_documentType =  "https://webapitransclick.azurewebsites.net/api/DocumenType";
 // CreditCards Service
 var service_creditCards =  "https://webapitransclick.azurewebsites.net/api/Creditcards";
+
+var service_consumption =  "https://webapitransclick.azurewebsites.net/api/Consumption";
