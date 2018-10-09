@@ -3,7 +3,7 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
 
     var arrayUrl = getUrlVars();
 
-    var url = service_creditCards  + '?' + arrayUrl.ID; 
+    var url = service_creditCards  + '?idUser=' + arrayUrl.ID; 
 
     // Obtener usuario mediante método GET
     $scope.getData = function() 
