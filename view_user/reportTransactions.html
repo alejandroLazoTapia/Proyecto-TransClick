@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <!-- Graficos -->
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
-    <!-- Graficos -->
+  
     <title>Mantenedor usuarios | </title>
 
     <!-- Bootstrap -->
@@ -30,6 +31,7 @@
   <!-- Plugin CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
+  <script src="../build/js/utilJS.js"></script>
   </head>
 
   <body class="nav-md" ng-app="App" ng-controller="CrudCtrl">
@@ -223,7 +225,7 @@
                           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap bulk_action" cellspacing="0" width="100%">
                               <thead>
                           <tr class="headings">
-                              <th class="column-title">  
+                              
                                   <select class="btn btn-xs btn-default" name="state" id="maxRows">
                                       <option value="">All</option>
                                     <option value="5">5</option>
@@ -231,7 +233,7 @@
                                     <option value="15">15</option>
                                     <option value="20">20</option>
                                   </select>  
-                                </th>         
+                                       
                           </tr>      
                           <tr class="headings">                                                            
                             <th class="column-title">FECHA Y HORA</th>
@@ -257,79 +259,39 @@
                           </tr>                          
                         </tbody>
                       </table>
+                        <div id="grafico"></div>
+                       
+                        <script>   
+                            var arrayUrl = getUrlVars();
+                  
+                            var xhReq = new XMLHttpRequest();
+                            xhReq.open("GET", "https://webapitransclick.azurewebsites.net/api/Consumption?idUserGraphic="+arrayUrl.ID, false);
+                            xhReq.send(null);
+                            var da = JSON.parse(xhReq.responseText);
+                            console.log(da);
+                            var dat = [];
+                        
+                            for (i = 0; i < da.length; i++) {
+                              var serie = new Array(da[i].mes, da[i].Total);
+                              console.log(serie);
+                              dat.push(serie);
+                              console.log(dat);
+                            }
+                          $(function($){
+                           $('#grafico').highcharts({
+                               title:{text:'Reporte Consumos'},
+                               xAxis:{title:{text:'Mes'}},
+                               yAxis:{title:{text:'Pesos $'}},
+                               tooltip:{valueSuffix:'$', pointFormat: '{series.total}: {point.y} (<b>{point.Pesos:..1f}$</b>)'},
+                               legend:{layout:'vertical',align:'right',verticalAlign:'middle',borderWidth:0},
+                               series:[{type: 'column',name: 'Consumo',data: dat}, 
+                      
+                             ],
+                               plotOptions:{line:{dataLabels:{enabled:true}}}
+                           });
+                       });
+                        </script>   
 
-        <div id="grafico"></div>
-      
-        <script src="../build/js/utilJS.js"></script>
-      <script>   
-          var arrayUrl = getUrlVars();
-
-          var xhReq = new XMLHttpRequest();
-          xhReq.open("GET", "https://webapitransclick.azurewebsites.net/api/Consumption?idUserGraphic="+arrayUrl.ID, false);
-          xhReq.send(null);
-          var da = JSON.parse(xhReq.responseText);
-          console.log(da);
-          var dat = [];
-      
-          for (i = 0; i < da.length; i++) {
-            var serie = new Array(da[i].mes, da[i].Total);
-            console.log(serie);
-            dat.push(serie);
-            console.log(dat);
-          }
-        $(function($){
-         $('#grafico').highcharts({
-             title:{text:'Reporte Consumos'},
-             xAxis:{title:{text:'Mes'}},
-             yAxis:{title:{text:'Pesos $'}},
-             tooltip:{valueSuffix:'$', pointFormat: '{series.total}: {point.y} (<b>{point.Pesos:..1f}$</b>)'},
-             legend:{layout:'vertical',align:'right',verticalAlign:'middle',borderWidth:0},
-             series:[{type: 'column',name: 'Consumo',data: dat}, 
-    
-           ],
-             plotOptions:{line:{dataLabels:{enabled:true}}}
-         });
-     });
-     /*
-     $(function($){
-        $('#grafico').highcharts({
-          chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: 1,//null,
-              plotShadow: false
-          },
-          title: {
-              text: 'Consumos Ultimos meses'
-          },
-          subtitle: {
-              text: 'Transclick.tk'
-          },
-          tooltip: {
-              pointFormat: '{series.mes}: {point.y} (<b>{point.percentage:.1f}%</b>)'
-          },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: true,
-                      format: '<b>{point.mes}</b>: {point.y}',
-                      style: {
-                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                      }
-                  }
-              }
-          },
-          series: [{
-              type: 'pie',
-              name: 'Publicidad',
-              data: dat
-          }]
-      });
-        //DreawChartPubli(data, 'container2');
-      });
-      */
-      </script>      
 
                       <div class="pagination"></div>                      
                     </div>							
@@ -355,6 +317,7 @@
         </div>
       </div>
 
+      
       <!--Graficos-->
       <!--<script src="../documentation/js/highcharts.js"></script>
       <script src="../documentation/js/exporting.js"></script>
@@ -380,7 +343,7 @@
       <!-- Plugin JS -->
       <script src="../build/js/mdb.min.js"></script>
       <script src="../build/js/jquery.cookie.js"></script>
-      <script src="../build/js/utilJS.js"></script>
+      
       <script src="../vendors/angularJS/angular.min.js"></script>  
       <script src="../vendors/toastr/toastr.min.js"></script>   
       <script src="../controllers/reportTransactions.js"></script>>
@@ -390,5 +353,6 @@
 
 
 
+     
   </body>
 </html>
