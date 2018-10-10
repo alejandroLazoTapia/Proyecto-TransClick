@@ -206,11 +206,12 @@
                                     <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
                                         <div class="profile_img">
                                             <div id="crop-avatar">
-                                                <!-- Current avatar -->
-                                                <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar">
+                                                <!-- Current avatar
+                                                <img class="img-responsive avatar-view" src="#" alt="Avatar" title="Change the avatar">
+                                                -->
                                             </div>
                                         </div>
-                                        <h3>Nombre Usuario Aqui</h3>                                       
+                                        <h3>{{entity.name}} {{entity.last_name}}</h3>                                       
 
                                         <!-- start skills -->
                                         <h4>Status</h4>
@@ -235,9 +236,7 @@
                                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                                 <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Personal</a>
-                                                </li>
-                                                <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Contraseña</a>
-                                                </li>
+                                                </li>                                                                                              
                                             </ul>
                                             <div id="myTabContent" class="tab-content">
                                                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
@@ -245,16 +244,13 @@
                                                     <!-- start recent activity -->
                                                     <ul class="messages">
                                                         <li>
-                                                            <img src="images/img.jpg" class="avatar" alt="Avatar">
+                                                            <!-- <img src="images/img.jpg" class="avatar" alt="Avatar">-->
                                                             <div class="message_date">
                                                                 <h3 class="date text-info">24</h3>
                                                                 <p class="month">May</p>
                                                             </div>
                                                             <div class="message_wrapper">
-                                                                <h4 class="heading">{{entity.name}}</h4>
-                                                                <blockquote class="message">RUT o Pasaporte: {{entity.num_document}} </blockquote>
-                                                                <blockquote class="message">Nombre: {{entity.name}}</blockquote>
-                                                                <blockquote class="message">Apellido: {{entity.last_name}}</blockquote>
+                                                                <blockquote class="message">Documento: {{entity.num_document}} </blockquote>
                                                                 <blockquote class="message">Sexo: {{entity.sex}}</blockquote>
                                                                 <blockquote class="message">Fecha Nacimiento: {{entity.birth_date}}</blockquote>
                                                                 <blockquote class="message">Email: {{entity.email}}</blockquote>
@@ -284,14 +280,7 @@
 
                                                 </div>
                                                 <a class="btn btn-success btn-group-justified"><i class="fa fa-edit m-right-xs"></i>Editar Perfil</a>
-                                        <br />
-                                                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                                                    <p>
-                                                        xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                              photo booth letterpress, commodo enim craft beer mlkshk
-                                                    </p>
 
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
