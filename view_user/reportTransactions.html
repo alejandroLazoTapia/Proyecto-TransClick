@@ -7,8 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
-    <title>Mis consumos | </title>
+    <title>Mantenedor usuarios | </title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,17 +16,12 @@
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
-
-
-  <!-- Plugin CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-  
   </head>
 
   <body class="nav-md" ng-app="App" ng-controller="CrudCtrl">
@@ -218,14 +212,16 @@
                   <div class="x_content">                                          
                     <div class="table-responsive">
                           <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap bulk_action" cellspacing="0" width="100%">
-                              <thead>                          
+                              <thead>  
+                                                         
                                   <select class="btn btn-xs btn-default" name="state" id="maxRows">
                                       <option value="">All</option>
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>
                                     <option value="20">20</option>
-                                  </select>                              
+                                  </select>    
+                                                       
                           <tr class="headings">                                                            
                             <th class="column-title">FECHA Y HORA</th>
                             <th class="column-title">MONTO</th>
@@ -249,18 +245,13 @@
                               </td>
                           </tr>                          
                         </tbody>
-                      </table>
-                       
-                        
-              
+                      </table>              
                       <div class="pagination"></div>                      
                     </div>							
                   </div>
                 </div>
               </div>
-
             </div>
-
           </form> 
           </div>
         <!-- /page content -->
@@ -277,11 +268,6 @@
         </div>
       </div>
 
-      
-      <!--Graficos-->
-      
- 
-    
       <!-- jQuery -->
       <script src="../vendors/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap -->
@@ -292,17 +278,14 @@
       <script src="../vendors/nprogress/nprogress.js"></script>
       <!-- iCheck -->
       <script src="../vendors/iCheck/icheck.min.js"></script>
-          <!-- bootstrap-daterangepicker -->
+      <!-- bootstrap-daterangepicker -->
       <script src="../vendors/moment/min/moment.min.js"></script>
       <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
       <!-- Custom Theme Scripts -->
       <script src="../build/js/custom.min.js"></script>
-          
       <!-- Graficos -->
-      <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
       <script src="http://code.highcharts.com/highcharts.js"></script>
       <script src="http://code.highcharts.com/modules/exporting.js"></script>
-
       <!-- Utils & Data -->
       <script src="../build/js/servicesJS.js"></script>
       <!-- Plugin JS -->

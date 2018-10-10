@@ -43,8 +43,13 @@ var source = builddata();
 var buildUL = function (parent, items) {
     $.each(items, function () {
         if (this.nombre) {
+            if(this.url!="#"){
             // create elemtos li y agrega los parientes en caso de haber hijos
             var li = $("<li><a href='"+this.url+"?" + getUrlEncrypt() +"'><i class='"+this.icon+"'></i>" + this.nombre + "<span class='"+this.span+"'></span></a></li>");
+        }else{
+            var li = $("<li><a><i class='"+this.icon+"'></i>" + this.nombre + "<span class='"+this.span+"'></span></a></li>");
+
+        }
             li.appendTo(parent);
             // if there are sub items, call the buildUL function.
             if (this.items && this.items.length > 0) {
