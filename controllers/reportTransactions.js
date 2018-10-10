@@ -10,9 +10,14 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
     {
         $http.get(url)
         .then(function(response){
-            $scope.JsonData = response.data;
-            getPagination('#datatable-responsive');
-            console.log(response.data);
+            if(response.status == 204){
+                toastr.info("No posee transacciones registradas");
+                $scope.JsonData = response.data;
+
+            }else{
+                $scope.JsonData = response.data;
+                getPagination('#datatable-responsive');                
+            }           
         }, function (error) {
             toastr.error("Ocurrió un error al intentar leer el registro");
             console.log(error);
@@ -41,13 +46,8 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
              yAxis:{title:{text:'Pesos $'}},
              tooltip:{valueSuffix:'$', pointFormat: '{series.total}: {point.y} (<b>{point.Pesos:..1f}$</b>)'},
              legend:{layout:'vertical',align:'right',verticalAlign:'middle',borderWidth:0},
-             series:[{type: 'column',name: 'Consumo',data: dat}, 
-    
-           ],
+             series:[{type: 'column',name: 'Consumo',data: dat},],
              plotOptions:{line:{dataLabels:{enabled:true}}}
          });
      });
-
-
 });
-
