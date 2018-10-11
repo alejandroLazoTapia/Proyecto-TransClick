@@ -60,7 +60,6 @@
   <script src="build/js/utilJS.js"></script>
   <script src="build/js/servicesJS.js"></script>
 
-
   <!-- Plugin JS -->
   <script src="vendors/jquery/dist/jquery.min.js"></script>
   <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -70,16 +69,13 @@
   <script src="vendors/toastr/toastr.min.js"></script>  
   <script src="controllers/loginController.js"></script>
 
-  <script>
-
-    function recaptcha_callback(){ 
-          
-      var IngresoBtn = document.querySelector("#ingreso-btn");
-        IngresoBtn.removeAttribute('disabled');
-      
-    }
-  </script>
-
-</body>
-
+    <script>
+      function recaptcha_callback(){ 
+            
+        var IngresoBtn = document.querySelector("#ingreso-btn");
+          IngresoBtn.removeAttribute('disabled');
+        
+      }
+    </script>
+  </body>
 </html>

@@ -2,7 +2,6 @@
    $(document).ready(function () {
     $.cookie("session", false);
     $.removeCookie("usuario");
-
 });
 
 //Valida los campos ingresados en el formulario  

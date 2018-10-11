@@ -17,7 +17,6 @@ angular.module('App', []).controller('CrudCtrl',function($scope, $http, $window)
                 console.log(error);
             });        
         }
-
     // Obtener tipo documento mediante método GET
     $scope.getDocumentType = function() 
     {
